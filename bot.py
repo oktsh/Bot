@@ -6,7 +6,6 @@ import requests
 now = str (datetime.date.today())
 s_city = "Moscow,RU"
 city_id = 524901
-appid = "6581d66893e86a4219501c41c6f2acba"
 
 def listener(messages):
     for m in messages:
@@ -17,7 +16,7 @@ def listener(messages):
         elif m.text =='погода' or m.text =='Погода':
             try:
                 res = requests.get("http://api.openweathermap.org/data/2.5/weather",
-                    params={'id': city_id, 'units': 'metric', 'lang': 'ru', 'APPID': appid})
+                    params={'id': city_id, 'units': 'metric', 'lang': 'ru', 'APPID': config.appid})
                 data = res.json()
                 bot.send_message(m.chat.id, 'Погода в Москве')
                 conditions = data['weather'][0]['description']
